@@ -11,6 +11,9 @@ angular.module('testApp')
   .directive('brackets', function() {
     return {
       require: 'ngModel',
+      scope: {
+        rez: '=color',
+      },
       link: function(scope, elm, attrs, ctrl) {
         ctrl.$parsers.unshift(function(brackets) {
           if (/^[\[|\]|\(|\)|\{|\}]+$/.test(brackets)) {
@@ -27,14 +30,17 @@ angular.module('testApp')
                   stack.pop();
                 }
                 else {
+                  scope.rez = 'false';
                   return 'Не валидно';
                 }
               }
             }
             if (stack.length === 0) {
+              scope.rez = 'true';
               return 'Валидно';
             }
           }
+          scope.rez = 'false';
           return 'Не валидно';
         });
       }
