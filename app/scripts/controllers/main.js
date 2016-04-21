@@ -40,6 +40,10 @@ angular.module('testApp')
               return 'Валидно';
             }
           }
+          else {
+            scope.rez = 'false';
+            return 'Вы ввели недопустимые символы';
+          }
           scope.rez = 'false';
           return 'Не валидно';
         });
